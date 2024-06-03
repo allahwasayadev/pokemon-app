@@ -366,3 +366,15 @@ export interface PokemonDetails {
   types: Type[];
   weight: number;
 }
+
+export interface DetailItem {
+  label: string;
+  value?: string | number;
+  image?: string;
+}
+
+export interface DetailSectionProps {
+  title: string;
+  items: DetailItem[];
+}
+
