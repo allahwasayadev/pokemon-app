@@ -9,7 +9,7 @@ import { Pokemon } from '../types/pokemonTypes';
 const PokemonList: React.FC = () => {
   const dispatch = useDispatch();
   const [page, setPage] = useState(0);
-  const { data, error, isLoading } = useGetPokemonListQuery(page);
+  const { data, error, isLoading } = useGetPokemonListQuery({ page });
   const pokemonList = useSelector((state: RootState) => state.pokemon.list[page] || []);
   const totalCount = useSelector((state: RootState) => state.pokemon.totalCount);
 
