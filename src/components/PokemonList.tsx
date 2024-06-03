@@ -4,12 +4,13 @@ import { useGetPokemonListQuery } from '../api/pokemonApi';
 import { RootState } from '../store/store';
 import { setPokemonList } from '../features/pokemonSlice';
 import { Link } from 'react-router-dom';
+import { Pokemon } from '../types/pokemonTypes';
 
 const PokemonList: React.FC = () => {
   const dispatch = useDispatch();
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState<number>(0);
   const { data, error, isLoading } = useGetPokemonListQuery({ page });
-  const pokemonList = useSelector((state: RootState) => state.pokemon.list[page] || []);
+  const pokemonList = useSelector((state: RootState) => state.pokemon.list[page] || []) as Pokemon[];
   const totalCount = useSelector((state: RootState) => state.pokemon.totalCount);
 
   useEffect(() => {
