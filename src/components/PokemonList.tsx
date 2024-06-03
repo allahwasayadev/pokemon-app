@@ -23,7 +23,6 @@ const PokemonList: React.FC = () => {
 
   return (
     <div className="container mx-auto p-6">
-      <h1 className="text-4xl font-bold mb-8 text-center">Welcome to the Pokemon App</h1>
       <h2 className="text-3xl font-bold mb-6">Pokemon List</h2>
       {isLoading && <div className="text-center text-lg">Loading...</div>}
       {error && <div className="text-center text-red-500">Error loading data. Please try again.</div>}
