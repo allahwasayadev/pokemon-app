@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { useGetPokemonListQuery } from '../api/pokemonApi';
-import { setPokemonList, setSelectedPokemon } from '../features/pokemonSlice';
 import { RootState } from '../store/store';
-import { Pokemon } from '../types/pokemonTypes';
+import { setPokemonList } from '../features/pokemonSlice';
+import { Link } from 'react-router-dom';
 
 const PokemonList: React.FC = () => {
   const dispatch = useDispatch();
@@ -14,52 +13,49 @@ const PokemonList: React.FC = () => {
   const totalCount = useSelector((state: RootState) => state.pokemon.totalCount);
 
   useEffect(() => {
-    if (data && pokemonList.length === 0) {
+    if (data) {
       dispatch(setPokemonList({ page, data: data.results, count: data.count }));
     }
-  }, [data, dispatch, page, pokemonList.length]);
+  }, [data, dispatch, page]);
 
   const handleNextPage = () => setPage((prev) => prev + 1);
   const handlePreviousPage = () => setPage((prev) => Math.max(prev - 1, 0));
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error loading data</div>;
-
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">Pokemon List</h1>
-      <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {pokemonList.map((pokemon: Pokemon, index: number) => (
-          <li
-            key={index}
-            className="p-4 bg-white rounded-lg shadow-md hover:bg-gray-100 transition-colors"
-          >
-            <Link
-              to={`/pokemon/${index + 1 + page * 20}`}
-              onClick={() => dispatch(setSelectedPokemon(pokemon.name))}
-              className="text-lg font-semibold text-center block"
+    <div className="container mx-auto p-6">
+      <h1 className="text-4xl font-bold mb-8 text-center">Welcome to the Pokemon App</h1>
+      <h2 className="text-3xl font-bold mb-6">Pokemon List</h2>
+      {isLoading && <div className="text-center text-lg">Loading...</div>}
+      {error && <div className="text-center text-red-500">Error loading data. Please try again.</div>}
+      {!isLoading && !error && (
+        <>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {pokemonList.map((pokemon, index) => (
+              <Link to={`/pokemon/${pokemon.url.split('/')[6]}`} key={index}>
+                <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
+                  <h3 className="text-xl font-semibold capitalize text-center">{pokemon.name}</h3>
+                </div>
+              </Link>
+            ))}
+          </div>
+          <div className="flex justify-between mt-8">
+            <button
+              onClick={handlePreviousPage}
+              disabled={page === 0}
+              className="bg-gray-400 text-white px-4 py-2 rounded disabled:bg-gray-300"
             >
-              {pokemon.name}
-            </Link>
-          </li>
-        ))}
-      </ul>
-      <div className="flex justify-between mt-4">
-        <button
-          onClick={handlePreviousPage}
-          disabled={page === 0}
-          className="bg-blue-500 text-white px-4 py-2 rounded disabled:bg-gray-300"
-        >
-          Previous
-        </button>
-        <button
-          onClick={handleNextPage}
-          disabled={pokemonList.length === 0 || (page + 1) * 20 >= totalCount}
-          className="bg-blue-500 text-white px-4 py-2 rounded disabled:bg-gray-300"
-        >
-          Next
-        </button>
-      </div>
+              Previous
+            </button>
+            <button
+              onClick={handleNextPage}
+              disabled={pokemonList.length === 0 || (page + 1) * 20 >= totalCount}
+              className="bg-blue-500 text-white px-4 py-2 rounded disabled:bg-gray-300"
+            >
+              Next
+            </button>
+          </div>
+        </>
+      )}
     </div>
   );
 };
