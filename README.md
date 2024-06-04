@@ -1,46 +1,110 @@
-# Getting Started with Create React App
+# Pokémon App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+The Pokémon App is a web application built with React, TypeScript, Redux, and the Redux Toolkit. It allows users to browse a list of Pokémon and view detailed information about each one. The project demonstrates the use of modern front-end technologies and best practices in testing, state management, and API integration.
 
-In the project directory, you can run:
+## Features
 
-### `yarn start`
+- **Home Page**: Displays a welcome message and a list of Pokémon.
+- **Pokémon List**: Lists all Pokémon fetched from the Pokémon API.
+- **Pokémon Detail Page**: Shows detailed information about a specific Pokémon, including:
+  - General Information
+  - Abilities
+  - Stats
+  - Types
+  - Forms
+  - Moves
+  - Game Indices
+  - Sprites
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Technologies Used
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- **React**: For building the user interface.
+- **TypeScript**: For type safety and better development experience.
+- **Redux**: For state management.
+- **Redux Toolkit**: Simplifies Redux setup and provides powerful tools for writing Redux logic.
+- **React Router**: For routing.
+- **Jest & React Testing Library**: For testing components and pages.
+- **Yarn**: Package manager.
 
-### `yarn test`
+## Requirements
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Node.js**: v21.2.0
+- **Yarn**: 1.22.22
 
-### `yarn build`
+## Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+To get started with the project, follow these steps:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. **Install Node.js**:
+    ```bash
+    # Using nvm (Node Version Manager)
+    nvm install 21.2.0
+    nvm use 21.2.0
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    # Or download from the official website and install
+    # https://nodejs.org/
+    ```
 
-### `yarn eject`
+2. **Install Yarn**:
+    ```bash
+    npm install -g yarn@1.22.22
+    ```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+3. **Clone the repository**:
+    ```bash
+    git clone https://github.com/allahwasayadev/pokemon-app.git
+    cd pokemon-app
+    ```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+4. **Install dependencies**:
+    ```bash
+    yarn install
+    ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+5. **Run the development server**:
+    ```bash
+    yarn start
+    ```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+6. **Run tests**:
+    ```bash
+    yarn test
+    ```
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Routes
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The application has the following routes:
+
+- `/`: Home page displaying a welcome message and the Pokémon list.
+- `/pokemon/:id`: Pokémon detail page showing detailed information about the selected Pokémon.
+
+## Usage
+
+### Home Page
+
+The Home Page displays a welcome message and a list of Pokémon. Each Pokémon in the list can be clicked to navigate to the Pokémon Detail Page.
+
+### Pokémon Detail Page
+
+The Pokémon Detail Page shows detailed information about the selected Pokémon. The displayed information includes:
+
+- **General Information**: Basic details such as height, weight, base experience, order, ID, default status, and location area encounters.
+- **Abilities**: List of abilities the Pokémon possesses.
+- **Stats**: The Pokémon's stats such as speed and special defense.
+- **Types**: Types of the Pokémon (e.g., grass, poison).
+- **Forms**: Different forms of the Pokémon.
+- **Moves**: Moves the Pokémon can learn.
+- **Game Indices**: Game indices for different versions.
+- **Sprites**: Images of the Pokémon's sprites.
+
+The data is fetched from the Pokémon API, and the application uses Redux for state management.
+
+## Testing
+
+The project includes unit tests for the components and pages and integration test cases for application. The tests are written using Jest and React Testing Library. To run the tests, use the following command:
+
+```bash
+yarn test
